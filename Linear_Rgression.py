@@ -23,7 +23,7 @@ plt.show()
 
 
 def compute_cost(x, y, w, b):
-    m = x.shape      #number of training examples
+    m = x.shape [0]     #number of training examples
     total_cost = 0   #declare the cost variable
 
     for i in range (m):  #for all the training examples 
@@ -38,7 +38,7 @@ def compute_cost(x, y, w, b):
 #repeat until convergence:{𝑏:=𝑏−𝛼∂𝐽(𝑤,𝑏)/∂𝑏𝑤:=𝑤−𝛼∂𝐽(𝑤,𝑏)/∂𝑤}
 
 def compute_gradient(x, y, w, b):
-    m = x.shape
+    m = len(x)
 
     dj_dw = 0
     dj_db = 0 #declare variables for the G. D.
@@ -57,4 +57,26 @@ def compute_gradient(x, y, w, b):
 # %%Implementing some unit tests
 
 
+# %%
+#initializing parameters
+w = 0
+b = 0
+
+#initializing Hyperparameters
+alpha = 0.01    #Learning RAte
+num_itr = 1500
+
+#Gradient DEcent iterations
+for i in range(num_itr):
+    dj_dw, dj_db = compute_gradient(x_train, y_train, w, b)
+    #update paras
+    w = w - alpha * dj_dw
+    b = b - alpha * dj_db
+
+    #prininting cost
+    if i % 100 == 0:
+        cost = compute_cost(x_train, y_train, w, b)
+        print (f'Iteration {i}   Cost : {cost}')
+
+print(f'weight= {w}, bias= {b}')
 # %%
